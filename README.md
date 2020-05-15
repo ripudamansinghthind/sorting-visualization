@@ -1,4 +1,4 @@
-Live at: https://ripthind.com/sorting-visualization
+Temporarily live at: https://cranky-shirley-2312fb.netlify.app/
 
 Basic project to display different sorting algorithms
 
