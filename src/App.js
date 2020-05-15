@@ -10,50 +10,58 @@ import './components/css/menu.css';
 
 import SortingContainer from './components/Layout/SortingContainer';
 
+import Img from './components/resources/ripthind.png'
+
 
 function App() {
   return (
     <div id = "container" style = {{backgroundColor: "white"}}>
+      <div className="home-navigation">
+      <h5>click my clock to go back to ripthind.com</h5>
+      <a href="https://ripthind.com/Projects" target="_blank" rel="noopener noreferrer">
+        <img className="actualimage" src={ Img } alt = "back to ripthind.com logo"/>
+        </a>
+      </div>
         <Router>
         <nav className="menu" id="menu">
           <div className="menu-content">
             <ul className="menu-items">
                 <li className="menu-item">
-                  <Link to="/Hide">
-                  <div className="clickyButton">Hide
-                  </div>
+                  <Link to="/Sorting">
+                    <div className="clickyButton">Make Random Array
+                    </div>
                   </Link>
                 </li>
                 <li className="menu-item">
                   <Link to="/">
-                  <div className="clickyButton">Make Array
-                  </div>
+                    <div className="clickyButton">Binary Sort
+                    </div>
                   </Link>
                 </li>
                 <li className="menu-item">
                   <Link to="/">
-                  <div className="clickyButton">Binary Sort
-                  </div>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link to="/">
-                  <div className="clickyButton">Settings
-                  </div>
+                    <div className="clickyButton">Settings
+                    </div>
                   </Link>
                 </li>
             </ul>
           </div>
       </nav>
         <Switch>
-                <Route exact path="/">
-                <SortingContainer />
-                </Route>
-                <Route path="/Experience">
-                </Route>
-                <Route path="/Projects">
-                </Route>
-              </Switch>
+          <Route exact path="/">
+            <div className="card" id="Profile">
+                <div className="row-card">
+                </div>
+            </div>
+          </Route>
+          <Route exact path="/Sorting">
+            <div className="card" id="Profile">
+                <div className="row-card">
+                  <SortingContainer></SortingContainer>
+                </div>
+            </div>
+          </Route>
+        </Switch>
       </Router>
     </div>
   );
