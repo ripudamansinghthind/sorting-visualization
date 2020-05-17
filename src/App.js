@@ -50,7 +50,7 @@ class App extends React.Component {
                 </li>
                 <li className="menu-item">
                   <Link to="/BinarySorting">
-                    <div className="clickyButton">Binary Sort
+                    <div className="clickyButton">Bubble Sort
                     </div>
                   </Link>
                 </li>

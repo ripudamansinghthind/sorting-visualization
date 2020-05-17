@@ -17,7 +17,9 @@ export class BinarySort extends React.Component {
   }
 
   haha(parameter) {
-    this.setState({ array: parameter.sort() });
+    var tempArray = []
+    tempArray = sortingBinaryMethod(parameter);
+    this.setState({ array: tempArray });
 }
 
 
@@ -34,6 +36,20 @@ export class BinarySort extends React.Component {
       </div>
        );
     }
+}
+
+function sortingBinaryMethod(parameter) {
+  var n = parameter.length;
+  for(var i=0; i<n-1; i++) {
+    for(var j=0; j<n-i-1; j++) {
+      if(parameter[j] > parameter[j+1]) {
+        var temp = parameter[j];
+        parameter[j] = parameter[j+1];
+        parameter[j+1] = temp;
+      }
+    }
+  }
+  return parameter;
 }
 
 export default BinarySort;
