@@ -20,6 +20,7 @@ export class SortingContainer extends React.Component {
             array.push(randomIntFromInterval(5, 730));
         }
         this.setState({ array });
+        this.props.triggerParentUpdate(array);
     }
 
     render() {

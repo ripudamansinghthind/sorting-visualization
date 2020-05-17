@@ -9,20 +9,36 @@ import {
 import './components/css/menu.css';
 
 import SortingContainer from './components/Layout/SortingContainer';
+import BinarySort from './components/Layout/BinarySort';
 
 import Img from './components/resources/ripthind.png'
 
 
-function App() {
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        arrayStatus: ['Please use "Make Random Array" before trying to sort it']
+    };
+    this.updateThisCounter = this.updateThisCounter.bind(this);
+}
+
+  updateThisCounter(parameter) {
+    this.setState({arrayStatus: parameter});
+  }
+  
+  render() {
   return (
     <div id = "container" style = {{backgroundColor: "white"}}>
       <div className="home-navigation">
-      <h5>click my clock to go back to ripthind.com</h5>
-      <a href="https://ripthind.com/Projects" target="_blank" rel="noopener noreferrer">
-        <img className="actualimage" src={ Img } alt = "back to ripthind.com logo"/>
+        <h5>click my clock to go back to ripthind.com</h5>
+        <a href="https://ripthind.com/Projects">
+          <img className="actualimage" src={ Img } alt = "back to ripthind.com logo"/>
         </a>
       </div>
-        <Router>
+      <Router>
         <nav className="menu" id="menu">
           <div className="menu-content">
             <ul className="menu-items">
@@ -33,7 +49,7 @@ function App() {
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/">
+                  <Link to="/BinarySorting">
                     <div className="clickyButton">Binary Sort
                     </div>
                   </Link>
@@ -46,7 +62,7 @@ function App() {
                 </li>
             </ul>
           </div>
-      </nav>
+        </nav>
         <Switch>
           <Route exact path="/">
             <div className="card" id="Profile">
@@ -57,7 +73,14 @@ function App() {
           <Route exact path="/Sorting">
             <div className="card" id="Profile">
                 <div className="row-card">
-                  <SortingContainer></SortingContainer>
+                  <SortingContainer triggerParentUpdate={ this.updateThisCounter }/>
+                </div>
+            </div>
+          </Route>
+          <Route exact path="/BinarySorting">
+            <div className="card" id="Profile">
+                <div className="row-card">
+                  <BinarySort message= {this.state.arrayStatus}/>
                 </div>
             </div>
           </Route>
@@ -65,6 +88,7 @@ function App() {
       </Router>
     </div>
   );
+}
 }
 
 export default App;
