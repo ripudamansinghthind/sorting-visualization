@@ -3,7 +3,7 @@ import '../css/sorting.css';
 
 /*this delay in state using promise idea is a huge thanks to https://ianmackay.io/ */
 const call = async (fn) => {
-  await new Promise(r => setImmediate(r));
+  await new Promise(r => setTimeout(r, 1));
   return fn();
 }
 
