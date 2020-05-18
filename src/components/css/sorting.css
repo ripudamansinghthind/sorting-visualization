@@ -9,3 +9,11 @@
     display: inline-block;
     margin: 0 1px;
 }
+@media only screen and (max-width: 768px) {
+    .array-bar {
+        width: 0.2px;
+        background-color: #e76f51;
+        display: inline-block;
+        margin: 0 1px;
+    }
+}

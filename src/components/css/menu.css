@@ -67,3 +67,46 @@ a {
     opacity: 0.5;
     transition: 0.5s ease;
 }
+
+@media only screen and (max-width: 768px) {
+    .row-card {
+        min-width: 200px;
+        min-height: 300px;
+        max-height: 300px;
+    }
+    .menu {
+        max-width: 150px;
+        max-height: 200px;
+        max-height: 210px;
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        top: 90px;
+        border-radius: 30px;
+        margin: 10px;
+    }
+    .menu-items {
+        padding: 0;
+        margin: 5px;
+    }
+    .clickyButton {
+        color: white;
+        font-size: 15px;
+    }
+    .card {
+        max-width: 800px;
+        min-height: 760px;
+        margin: 0;
+        text-align: center;
+        border-radius: 30px;
+    }
+    .home-navigation {
+        margin: 0;
+    }
+    .actualimage {
+        position:absolute;
+        width: 40px;
+        height: 40px;
+        margin: 10px;
+    }
+}
