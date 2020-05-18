@@ -9,7 +9,7 @@ import {
 import './components/css/menu.css';
 
 import SortingContainer from './components/Layout/SortingContainer';
-import BinarySort from './components/Layout/BinarySort';
+import BubbleSort from './components/Layout/BinarySort';
 
 import Img from './components/resources/ripthind.png'
 
@@ -80,7 +80,7 @@ class App extends React.Component {
           <Route exact path="/BinarySorting">
             <div className="card" id="Profile">
                 <div className="row-card">
-                  <BinarySort message= {this.state.arrayStatus}/>
+                  <BubbleSort message= {this.state.arrayStatus}/>
                 </div>
             </div>
           </Route>
