@@ -55,7 +55,7 @@ class App extends React.Component {
                   </Link>
                 </li>
                 <li className="menu-item">
-                  <Link to="/">
+                  <Link to="/Settings">
                     <div className="clickyButton">Settings
                     </div>
                   </Link>
@@ -70,17 +70,24 @@ class App extends React.Component {
                 </div>
             </div>
           </Route>
-          <Route exact path="/Sorting">
+          <Route path="/Sorting">
             <div className="card" id="Profile">
                 <div className="row-card">
                   <SortingContainer triggerParentUpdate={ this.updateThisCounter }/>
                 </div>
             </div>
           </Route>
-          <Route exact path="/BinarySorting">
+          <Route path="/BinarySorting">
             <div className="card" id="Profile">
                 <div className="row-card">
                   <BubbleSort message= {this.state.arrayStatus}/>
+                </div>
+            </div>
+          </Route>
+          <Route path="/Settings">
+            <div className="card" id="Profile">
+                <div className="row-card">
+                  <p>This is a work in progress</p>
                 </div>
             </div>
           </Route>
