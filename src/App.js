@@ -9,7 +9,7 @@ import {
 import './components/css/menu.css';
 
 import SortingContainer from './components/Layout/SortingContainer';
-import BubbleSort from './components/Layout/BinarySort';
+import BubbleSort from './components/Layout/BubbleSort';
 
 import Img from './components/resources/ripthind.png'
 
