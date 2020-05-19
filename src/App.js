@@ -10,6 +10,7 @@ import './components/css/menu.css';
 
 import SortingContainer from './components/Layout/SortingContainer';
 import BubbleSort from './components/Layout/BubbleSort';
+import InsertionSort from './components/Layout/InsertionSort';
 
 import Img from './components/resources/ripthind.png'
 
@@ -33,7 +34,7 @@ class App extends React.Component {
   return (
     <div id = "container" style = {{backgroundColor: "white"}}>
       <div className="home-navigation">
-        <h5>click my clock to go back to ripthind.com</h5>
+        <h5>click the clock to go back to ripthind.com</h5>
         <a href="https://ripthind.com/Projects">
           <img className="actualimage" src={ Img } alt = "back to ripthind.com logo"/>
         </a>
@@ -51,6 +52,12 @@ class App extends React.Component {
                 <li className="menu-item">
                   <Link to="/BinarySorting">
                     <div className="clickyButton">Bubble Sort
+                    </div>
+                  </Link>
+                </li>
+                <li className="menu-item">
+                  <Link to="/InsertionSorting">
+                    <div className="clickyButton">Insertion Sort
                     </div>
                   </Link>
                 </li>
@@ -81,6 +88,13 @@ class App extends React.Component {
             <div className="card" id="Profile">
                 <div className="row-card">
                   <BubbleSort message= {this.state.arrayStatus}/>
+                </div>
+            </div>
+          </Route>
+          <Route path="/InsertionSorting">
+            <div className="card" id="Profile">
+                <div className="row-card">
+                  <InsertionSort message= {this.state.arrayStatus}/>
                 </div>
             </div>
           </Route>

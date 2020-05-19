@@ -7,7 +7,7 @@ const call = async (fn) => {
   return fn();
 }
 
-export default class BubbleSort extends React.Component {
+export default class InsertionSort extends React.Component {
 
   constructor(props) {
     super(props);
@@ -41,7 +41,6 @@ export default class BubbleSort extends React.Component {
       }
   }
   }
-
 
   render() {
     const {array} = this.state;
