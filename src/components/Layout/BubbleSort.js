@@ -30,7 +30,6 @@ export default class BubbleSort extends React.Component {
 
   async sortFunction(parameter) {
     let count = 0;
-    console.log(parameter);
     const n = parameter.length;
     for (let i = 0; i < n - 1; i++) {
       for (let j = 0; j < n - i - 1; j++) {

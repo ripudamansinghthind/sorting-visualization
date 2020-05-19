@@ -11,6 +11,7 @@ import './components/css/menu.css';
 import SortingContainer from './components/Layout/SortingContainer';
 import BubbleSort from './components/Layout/BubbleSort';
 import InsertionSort from './components/Layout/InsertionSort';
+import SelectionSort from './components/Layout/SelectionSort';
 
 import Img from './components/resources/ripthind.png'
 
@@ -62,6 +63,12 @@ class App extends React.Component {
                   </Link>
                 </li>
                 <li className="menu-item">
+                  <Link to="/SelectionSorting">
+                    <div className="clickyButton">Selection Sort
+                    </div>
+                  </Link>
+                </li>
+                <li className="menu-item">
                   <Link to="/Settings">
                     <div className="clickyButton">Settings
                     </div>
@@ -95,6 +102,13 @@ class App extends React.Component {
             <div className="card" id="Profile">
                 <div className="row-card">
                   <InsertionSort message= {this.state.arrayStatus}/>
+                </div>
+            </div>
+          </Route>
+          <Route path="/SelectionSorting">
+            <div className="card" id="Profile">
+                <div className="row-card">
+                  <SelectionSort message= {this.state.arrayStatus}/>
                 </div>
             </div>
           </Route>

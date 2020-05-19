@@ -30,18 +30,25 @@ export default class InsertionSort extends React.Component {
   async sortFunction(array) {
     let count = 0;
     let n = array.length;
-    for (let j = 1; j < n; j++) {
-        let key = array[j];
-        let i = j-1;
-        while ( (i > -1) && ( array[i] > key ) ) {
-            array[i+1] = array[i];
-            i--;
-            count++;
-            await call(() => this.swap(array, count));
-        }
-        array[i+1] = key;
+    // One by one move boundary of unsorted subarray
+    for (let i = 0; i < n-1; i++)
+    {
+        // Find the minimum element in unsorted array
+        let min_idx = i;
+        for (let j = i+1; j < n; j++)
+            if (array[j] < array[min_idx])
+                min_idx = j;
+        // Swap the found minimum element with the first
+        // element
+        let temp = array[min_idx];
+        await call(() => this.swap(array, count));
+        array[min_idx] = array[i];
+        await call(() => this.swap(array, count));
+        array[i] = temp;
+        await call(() => this.swap(array, count));
     }
-}
+  }
+
   render() {
     const {array} = this.state;
     return (
