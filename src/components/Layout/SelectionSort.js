@@ -3,7 +3,7 @@ import '../css/sorting.css';
 
 /*this delay in state using promise idea is a huge thanks to https://ianmackay.io/ */
 const call = async (fn) => {
-  await new Promise(r => setTimeout(r, 1));
+  await new Promise(r => setTimeout(r, 3));
   return fn();
 }
 
@@ -41,6 +41,7 @@ export default class InsertionSort extends React.Component {
         // Swap the found minimum element with the first
         // element
         let temp = array[min_idx];
+        count++;
         await call(() => this.swap(array, count));
         array[min_idx] = array[i];
         await call(() => this.swap(array, count));
