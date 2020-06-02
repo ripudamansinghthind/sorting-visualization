@@ -1,129 +1,186 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import './index.css';
+import { ReactComponent as CogIcon } from './components/icons/cog.svg';
+import { ReactComponent as ChevronIcon } from './components/icons/chevron.svg';
+import { ReactComponent as ArrowIcon } from './components/icons/arrow.svg';
+import { ReactComponent as PlusIcon } from './components/icons/plus.svg';
+import { ReactComponent as PlayIcon } from './components/icons/play.svg';
 
-import './components/css/menu.css';
-
+import React, { useState, useEffect, useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import SortingContainer from './components/Layout/SortingContainer';
 import BubbleSort from './components/Layout/BubbleSort';
-import InsertionSort from './components/Layout/InsertionSort';
-import SelectionSort from './components/Layout/SelectionSort';
 
-import Img from './components/resources/ripthind.png'
+import soundFile from './components/resources/menuSound.mp3';
 
 
-class App extends React.Component {
 
-  constructor(props) {
-    super(props);
+// Change this value for the speed of the animations.
+const ANIMATION_SPEED_MS = 1;
 
-    this.state = {
-        arrayStatus: ['Please use "Make Random Array" before trying to sort it']
+function App() {
+  const [activeMenu, setActiveMenu] = useState('main');
+  const [menuHeight, setMenuHeight] = useState(null);
+  const dropdownRef = useRef(null);
+
+  const [array, setArray] = useState([]);
+  const [algorithm, setAlgorithm] = useState('Bubble Sort (default)');
+  
+
+  function DropdownItem(props) {
+    return (
+      <a href="#" className="menu-item" onClick={() => {
+        props.onClick && props.onClick();
+        props.goToMenu && setActiveMenu(props.goToMenu);
+       }}>
+        <span className="icon-button">{props.leftIcon}</span>
+        {props.children}
+        <span className="icon-right">{props.rightIcon}</span>
+      </a>
+    );
+  }
+
+  function sound() {
+    soundFile.play();
+  }
+  function RandomArray() {
+    const array = [];
+    for (let i = 0; i < 140; i++) {
+        array.push(randomIntFromInterval(5, 730))
+        setArray(array);
     };
-    this.updateThisCounter = this.updateThisCounter.bind(this);
-}
+  }
 
-  updateThisCounter(parameter) {
-    this.setState({arrayStatus: parameter});
+  async function BubbleSort() {
+    let parameter = array;
+    const n = parameter.length;
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = 0; j < n - i - 1; j++) {
+        if (parameter[j] > parameter[j+1]) {
+          let temp = parameter[j];
+          parameter[j] = parameter[j+1];
+          parameter[j+1] = temp;
+          Promise.resolve().then(() => {
+            setArray(parameter);
+          })
+        }
+      }
+  }
   }
   
-  render() {
+  function randomIntFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  function sortArray() { 
+    if(algorithm === 'Bubble Sort' || algorithm === 'Bubble Sort (default)') {
+      BubbleSort();
+    }
+    else if(algorithm === 'Selection Sort') {
+    }
+    else if(algorithm === 'Quick Sort') {
+
+    }
+    else {
+      setAlgorithm('Select Sort Again');
+    }
+  }
+
+  useEffect(() => {
+    setMenuHeight(dropdownRef.current?.firstChild.offsetHeight)
+  }, [])
+
   return (
-    <div id = "container" style = {{backgroundColor: "white"}}>
-      <div className="home-navigation">
-        <h5>click the clock to go back to ripthind.com</h5>
-        <a href="https://ripthind.com/Projects">
-          <img className="actualimage" src={ Img } alt = "back to ripthind.com logo"/>
-        </a>
-      </div>
-      <Router>
-        <nav className="menu" id="menu">
-          <div className="menu-content">
-            <ul className="menu-items">
-                <li className="menu-item">
-                  <Link to="/Sorting">
-                    <div className="clickyButton">Make Random Array
-                    </div>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link to="/BinarySorting">
-                    <div className="clickyButton">Bubble Sort
-                    </div>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link to="/InsertionSorting">
-                    <div className="clickyButton">Insertion Sort
-                    </div>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link to="/SelectionSorting">
-                    <div className="clickyButton">Selection Sort
-                    </div>
-                  </Link>
-                </li>
-                <li className="menu-item">
-                  <Link to="/Settings">
-                    <div className="clickyButton">Settings
-                    </div>
-                  </Link>
-                </li>
-            </ul>
-          </div>
-        </nav>
-        <Switch>
-          <Route exact path="/">
-            <div className="card" id="Profile">
-                <div className="row-card">
-                </div>
+    <>
+    <div className="card" id="Profile">
+            <div className="row-card">
+            <div className="array-container">
+            {array.map((value, idx) => (
+                <div 
+                className="array-bar" 
+                key={idx}
+                style={{height: `${value}px`}}></div>
+            ))}
             </div>
-          </Route>
-          <Route path="/Sorting">
-            <div className="card" id="Profile">
-                <div className="row-card">
-                  <SortingContainer triggerParentUpdate={ this.updateThisCounter }/>
-                </div>
             </div>
-          </Route>
-          <Route path="/BinarySorting">
-            <div className="card" id="Profile">
-                <div className="row-card">
-                  <BubbleSort message= {this.state.arrayStatus}/>
-                </div>
             </div>
-          </Route>
-          <Route path="/InsertionSorting">
-            <div className="card" id="Profile">
-                <div className="row-card">
-                  <InsertionSort message= {this.state.arrayStatus}/>
-                </div>
-            </div>
-          </Route>
-          <Route path="/SelectionSorting">
-            <div className="card" id="Profile">
-                <div className="row-card">
-                  <SelectionSort message= {this.state.arrayStatus}/>
-                </div>
-            </div>
-          </Route>
-          <Route path="/Settings">
-            <div className="card" id="Profile">
-                <div className="row-card">
-                  <p>This is a work in progress</p>
-                </div>
-            </div>
-          </Route>
-        </Switch>
-      </Router>
+    <div className="dropdown" style={{ height: menuHeight }} ref={dropdownRef}>
+      <CSSTransition
+        in={activeMenu === 'main'}
+        timeout={500}
+        classNames="menu-primary"
+        unmountOnExit
+        onEnter={(el) => setMenuHeight(calcHeight(el))}>
+        <div className="menu">
+            <DropdownItem
+              rightIcon={<PlusIcon />}
+              onClick= {() => sound()}> 
+              Make Random array
+              </DropdownItem>
+            <DropdownItem
+              rightIcon={<ChevronIcon />}
+              goToMenu="animals">
+              Sorting algorithm - {algorithm}
+            </DropdownItem>
+            <DropdownItem
+              rightIcon={<CogIcon />}
+              goToMenu="settings">
+              Settings
+            </DropdownItem>
+            <DropdownItem
+              rightIcon={<PlayIcon /> }
+              onClick= {() => sortArray()}>
+              Run
+            </DropdownItem>
+        </div>
+      </CSSTransition>
+      <CSSTransition
+        in={activeMenu === 'settings'}
+        timeout={500}
+        classNames="menu-secondary"
+        unmountOnExit
+        onEnter= {(el) => setMenuHeight(calcHeight(el))}>
+        <div className="menu">
+          <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
+            <h4>Settings - This area is under construction</h4>
+          </DropdownItem>
+        </div>
+      </CSSTransition>
+      <CSSTransition
+        in={activeMenu === 'animals'}
+        timeout={500}
+        classNames="menu-secondary"
+        unmountOnExit
+        onEnter={(el) => setMenuHeight(calcHeight(el))}>
+        <div className="menu">
+          <DropdownItem goToMenu="main" leftIcon={<ArrowIcon />}>
+            <h4>Sorting Methods</h4>
+          </DropdownItem>
+          <DropdownItem 
+            rightIcon="🦘"
+            goToMenu="main"
+            onClick= {() => setAlgorithm('Bubble Sort')}>
+            Binary Sort
+          </DropdownItem>
+          <DropdownItem 
+            rightIcon="🐸"
+            goToMenu="main"
+            onClick= {() => setAlgorithm('Selection Sort')}>
+            Selection Sort
+          </DropdownItem>
+          <DropdownItem 
+            rightIcon="🦋"
+            goToMenu="main"
+            onClick= {(() => setAlgorithm('Quick Sort'))}>
+            Quick Sort
+          </DropdownItem>
+        </div>
+      </CSSTransition>
     </div>
+    </>
   );
 }
-}
+
+const calcHeight = (el) => el.offsetHeight;
+
 
 export default App;

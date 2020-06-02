@@ -17,3 +17,33 @@
         margin: 0 1px;
     }
 }
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px rgba(0, 0, 0, 0.2) solid;
+    max-width: 800px;
+    min-height: 800px;
+    margin: 30px auto;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.row-card {
+    margin: 5%;
+    min-width: 700px;
+    min-height: 700px;
+}
+
+.home-navigation {
+    margin-left: 15px;
+}
+.actualimage {
+    position:absolute;
+    width: 100px;
+    height: 100px;
+}
+
+.actualimage:hover {
+    opacity: 0.5;
+    transition: 0.5s ease;
+}

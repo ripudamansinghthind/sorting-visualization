@@ -20,12 +20,13 @@ export class SortingContainer extends React.Component {
             array.push(randomIntFromInterval(5, 730));
         }
         this.setState({ array });
-        this.props.triggerParentUpdate(array);
     }
 
     render() {
         const {array} = this.state;
         return (
+            <div className="card" id="Profile">
+            <div className="row-card">
             <div className="array-container">
             {array.map((value, idx) => (
                 <div 
@@ -34,10 +35,11 @@ export class SortingContainer extends React.Component {
                 style={{height: `${value}px`}}></div>
             ))}
             </div>
+            </div>
+            </div>
         );
     }
 }
-
 function randomIntFromInterval(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
